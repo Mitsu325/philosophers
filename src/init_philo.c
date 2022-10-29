@@ -6,7 +6,7 @@
 /*   By: pmitsuko <pmitsuko@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 16:11:26 by pmitsuko          #+#    #+#             */
-/*   Updated: 2022/10/29 16:49:49 by pmitsuko         ###   ########.fr       */
+/*   Updated: 2022/10/29 16:56:02 by pmitsuko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,5 @@ int	init_philo(t_data *data, t_philo **philo)
 			(*philo)[i].r_fork = i - 1;
 		(*philo)[i].data = data;
 	}
-	return(SUCCESS);
+	return (SUCCESS);
 }
