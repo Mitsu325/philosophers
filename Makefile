@@ -6,7 +6,7 @@
 #    By: pmitsuko <pmitsuko@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/20 07:29:43 by pmitsuko          #+#    #+#              #
-#    Updated: 2022/10/29 12:30:37 by pmitsuko         ###   ########.fr        #
+#    Updated: 2022/10/29 13:02:07 by pmitsuko         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,7 +45,8 @@ VPATH = $(SRC_DIR)
 
 FILES = main.c\
 		parser.c\
-		put_msg.c
+		put_msg.c\
+		utils.c
 
 # COMPILED_SOURCES #
 
