@@ -6,7 +6,7 @@
 #    By: pmitsuko <pmitsuko@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/20 07:29:43 by pmitsuko          #+#    #+#              #
-#    Updated: 2022/10/29 11:27:10 by pmitsuko         ###   ########.fr        #
+#    Updated: 2022/10/29 12:30:37 by pmitsuko         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,7 +43,9 @@ VPATH = $(SRC_DIR)
 
 # FILES #
 
-FILES = main.c
+FILES = main.c\
+		parser.c\
+		put_msg.c
 
 # COMPILED_SOURCES #
 
@@ -74,7 +76,6 @@ clean:
 		@$(RM) $(OBJ_DIR) *.gc*
 
 fclean: clean
-		@make fclean --no-print-directory -C $(LIBFT_DIR)
 		@$(RM) $(NAME)
 		@echo "\n$(MAGENTA)----------------------------------------"
 		@echo "------------- CLEANING DONE ------------"
