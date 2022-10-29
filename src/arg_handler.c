@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.c                                           :+:      :+:    :+:   */
+/*   arg_handler.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pmitsuko <pmitsuko@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/29 11:49:25 by pmitsuko          #+#    #+#             */
-/*   Updated: 2022/10/29 13:10:07 by pmitsuko         ###   ########.fr       */
+/*   Created: 2022/10/29 15:51:03 by pmitsuko          #+#    #+#             */
+/*   Updated: 2022/10/29 15:51:04 by pmitsuko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,27 +49,49 @@ static int	str_is_numeric(char *str)
 */
 int	check_arg(int argc, char **argv)
 {
-	int	i;
+	int		i;
+	long	num;
 
 	if (argc < 5 || argc > 6)
 	{
-		put_msg_fd(ERR_NUM_ARG, STDERR_FILENO);
-		put_msg_fd(PHILO_ARG, STDERR_FILENO);
-		return (FAILURE);
+		msg_error(ERR_NUM_ARG);
+		return (msg_error(PHILO_ARG));
 	}
 	i = 0;
 	while (argv[++i])
 	{
 		if (!str_is_numeric(argv[i]))
-		{
-			put_msg_fd(ERR_TYPE_ARG, STDERR_FILENO);
-			return (FAILURE);
-		}
-		if (ft_atol(argv[i]) < 0 || ft_atol(argv[i]) > INT_MAX)
-		{
-			put_msg_fd(ERR_RANGE_ARG, STDERR_FILENO);
-			return (FAILURE);
-		}
+			return (msg_error(ERR_TYPE_ARG));
+		num = ft_atol(argv[i]);
+		if (num < 0 || num > INT_MAX)
+			return (msg_error(ERR_RANGE_ARG));
+		if (i == 1 && num == 0)
+			return (msg_error(NO_PHILO));
+		if (i == 5 && num == 0)
+			return (msg_error(ZERO_MUST_EAT));
 	}
+	return (SUCCESS);
+}
+
+/*	SAVE_ARG
+**	------------
+**	DESCRIPTION
+**
+**	PARAMETERS
+**	#1. The number of strings pointed to by argv (argc);
+**	#2. The strings pointed (argv);
+**	#3. The data struct pointed (data);
+**	RETURN VALUES
+**	Return 0 if success and 1 if failure
+*/
+int	save_arg(int argc, char **argv, t_data *data)
+{
+	data->number_philo = (int)ft_atol(argv[1]);
+	data->time_die = (int)ft_atol(argv[2]);
+	data->time_eat = (int)ft_atol(argv[3]);
+	data->time_sleep = (int)ft_atol(argv[4]);
+	data->number_must_eat = -1;
+	if (argc == 6)
+		data->number_must_eat = (int)ft_atol(argv[5]);
 	return (SUCCESS);
 }

@@ -1,23 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pmitsuko <pmitsuko@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/29 11:29:09 by pmitsuko          #+#    #+#             */
-/*   Updated: 2022/10/29 15:49:30 by pmitsuko         ###   ########.fr       */
+/*   Created: 2022/10/29 15:37:07 by pmitsuko          #+#    #+#             */
+/*   Updated: 2022/10/29 15:39:37 by pmitsuko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-int	main(int argc, char **argv)
+/*	MSG_ERROR
+**	------------
+**	DESCRIPTION
+**	Write message to the standard error file descriptor.
+**	PARAMETERS
+**	#1. The output message (msg);
+**	RETURN VALUES
+**	Return 1.
+*/
+int	msg_error(char *msg)
 {
-	t_data	data;
-
-	if (check_arg(argc, argv) == FAILURE)
-		return (FAILURE);
-	save_arg(argc, argv, &data);
-	return (SUCCESS);
+	put_msg_fd(msg, STDERR_FILENO);
+	return (FAILURE);
 }
