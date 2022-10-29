@@ -6,7 +6,7 @@
 #    By: pmitsuko <pmitsuko@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/20 07:29:43 by pmitsuko          #+#    #+#              #
-#    Updated: 2022/10/20 07:32:24 by pmitsuko         ###   ########.fr        #
+#    Updated: 2022/10/29 11:27:10 by pmitsuko         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ NAME = philo
 
 # LIBRARY #
 
-HEADER = -I includes -I
+HEADER = -I includes -lpthread
 
 # COMPILATION #
 
@@ -81,5 +81,15 @@ fclean: clean
 		@echo "----------------------------------------\n$(DEFAULT)"
 
 re: fclean all
+
+# **************************************************************************** #
+
+## TESTS ##
+
+valgrind: re
+	@valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./philo
+
+helgrind: re
+	@valgrind --tool=helgrind ./philo
 
 .PHONY: all clean fclean re
