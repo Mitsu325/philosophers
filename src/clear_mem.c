@@ -1,27 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   clear_mem.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pmitsuko <pmitsuko@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/29 11:29:09 by pmitsuko          #+#    #+#             */
-/*   Updated: 2022/10/29 16:23:27 by pmitsuko         ###   ########.fr       */
+/*   Created: 2022/10/29 16:19:34 by pmitsuko          #+#    #+#             */
+/*   Updated: 2022/10/29 16:50:57 by pmitsuko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-int	main(int argc, char **argv)
+/*	CLEAR_MEMORY
+**	------------
+**	DESCRIPTION
+**	Free all memory allocated.
+**	PARAMETERS
+**	#1. The philo struct pointed (philo);
+**	#2. The return value (status);
+**	RETURN VALUES
+**	Return status value.
+*/
+int	clear_memory(t_philo **philo, int status)
 {
-	t_data	data;
-	t_philo	*philo;
-
-	if (check_arg(argc, argv) == FAILURE)
-		return (FAILURE);
-	save_arg(argc, argv, &data);
-	philo = NULL;
-	if (init_philo(&data, &philo) == FAILURE)
-		return (FAILURE);
-	return (clear_memory(&philo, SUCCESS));
+	if (*philo)
+	{
+		free(*philo);
+		*philo = NULL;
+	}
+	return (status);
 }

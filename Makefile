@@ -6,7 +6,7 @@
 #    By: pmitsuko <pmitsuko@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/20 07:29:43 by pmitsuko          #+#    #+#              #
-#    Updated: 2022/10/29 15:51:12 by pmitsuko         ###   ########.fr        #
+#    Updated: 2022/10/29 16:24:35 by pmitsuko         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,7 +47,9 @@ FILES = main.c\
 		arg_handler.c\
 		put_msg.c\
 		utils.c\
-		error.c
+		error.c\
+		init_philo.c\
+		clear_mem.c
 
 # COMPILED_SOURCES #
 
@@ -90,9 +92,9 @@ re: fclean all
 ## TESTS ##
 
 valgrind: re
-	@valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./philo
+	@valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./philo 2 100 80 20
 
 helgrind: re
-	@valgrind --tool=helgrind ./philo
+	@valgrind --tool=helgrind ./philo 2 100 80 20
 
 .PHONY: all clean fclean re

@@ -6,7 +6,7 @@
 /*   By: pmitsuko <pmitsuko@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 11:30:26 by pmitsuko          #+#    #+#             */
-/*   Updated: 2022/10/29 15:49:59 by pmitsuko         ###   ########.fr       */
+/*   Updated: 2022/10/29 16:40:29 by pmitsuko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 # include <pthread.h>
 # include <unistd.h>
+# include <stdlib.h>
+# include <stdio.h>
 # include <limits.h>
 
 # define ERR_NUM_ARG "Wrong number of arguments"
@@ -40,17 +42,30 @@ typedef enum e_boolean
 
 typedef struct s_data
 {
-	int	number_philo;
-	int	time_die;
-	int	time_eat;
-	int	time_sleep;
-	int	number_must_eat;
+	int				number_philo;
+	int				time_die;
+	int				time_eat;
+	int				time_sleep;
+	int				number_must_eat;
+	pthread_mutex_t	*forks;
 }	t_data;
+
+typedef struct s_philo
+{
+	int		id;
+	int		l_fork;
+	int		r_fork;
+	t_data	*data;
+}	t_philo;
 
 int		check_arg(int argc, char **argv);
 int		save_arg(int argc, char **argv, t_data *data);
 
+int		init_philo(t_data *data, t_philo **philo);
+
 int		msg_error(char *msg);
+
+int		clear_memory(t_philo **philo, int status);
 
 void	put_msg_fd(char *s, int fd);
 
