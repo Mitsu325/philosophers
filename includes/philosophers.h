@@ -6,7 +6,7 @@
 /*   By: pmitsuko <pmitsuko@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 11:30:26 by pmitsuko          #+#    #+#             */
-/*   Updated: 2022/10/29 18:48:17 by pmitsuko         ###   ########.fr       */
+/*   Updated: 2022/10/29 19:48:18 by pmitsuko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdio.h>
+# include <sys/time.h>
 # include <limits.h>
 
 # define ERR_NUM_ARG "Wrong number of arguments"
@@ -58,6 +59,7 @@ typedef struct s_data
 	int				time_eat;
 	int				time_sleep;
 	int				number_must_eat;
+	long long int	create_date;
 	pthread_mutex_t	*mutex;
 	pthread_mutex_t	*forks;
 }	t_data;

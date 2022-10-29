@@ -6,16 +6,34 @@
 /*   By: pmitsuko <pmitsuko@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 17:36:51 by pmitsuko          #+#    #+#             */
-/*   Updated: 2022/10/29 19:20:01 by pmitsuko         ###   ########.fr       */
+/*   Updated: 2022/10/29 19:52:54 by pmitsuko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
+long long int	date_now(void)
+{
+	struct timeval	time;
+
+	gettimeofday(&time, NULL);
+	return (time.tv_sec * 1000 + time.tv_usec / 1000);
+}
+
+long long int	elapsed_time(long long int start_time)
+{
+	return ((date_now() - start_time));
+}
+
+int	msleep(long long int time_in_ms)
+{
+	return (usleep(time_in_ms * 1000));
+}
+
 void	print_log(t_philo *philo, char *msg)
 {
 	pthread_mutex_lock(&philo->data->mutex[PRINT]);
-	printf("Philosopher %d %s\n", philo->id, msg);
+	printf("%lld Philosopher %d %s\n", elapsed_time(philo->data->create_date), philo->id, msg);
 	pthread_mutex_unlock(&philo->data->mutex[PRINT]);
 }
 
@@ -53,7 +71,7 @@ void	*life_philo(void *arg)
 
 	philo = (t_philo *)arg;
 	if (philo->id % 2 == 0)
-		usleep(500);
+		msleep(5);
 	hold_fork(philo);
 	print_log(philo, EAT);
 	print_log(philo, SLEEP);
@@ -67,6 +85,7 @@ int	simulator(t_data *data, t_philo *philo)
 	pthread_t	*thread;
 	int			i;
 
+	data->create_date = date_now();
 	thread = (pthread_t *)malloc(sizeof(pthread_t) * data->number_philo);
 	if (thread == NULL)
 		return (FAILURE);

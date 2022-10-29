@@ -6,7 +6,7 @@
 /*   By: pmitsuko <pmitsuko@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 15:51:03 by pmitsuko          #+#    #+#             */
-/*   Updated: 2022/10/29 18:19:13 by pmitsuko         ###   ########.fr       */
+/*   Updated: 2022/10/29 19:45:45 by pmitsuko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,5 +95,6 @@ int	save_arg(int argc, char **argv, t_data *data)
 		data->number_must_eat = (int)ft_atol(argv[5]);
 	data->forks = NULL;
 	data->mutex = NULL;
+	data->create_date = -1;
 	return (SUCCESS);
 }
