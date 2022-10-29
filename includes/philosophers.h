@@ -6,7 +6,7 @@
 /*   By: pmitsuko <pmitsuko@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 11:30:26 by pmitsuko          #+#    #+#             */
-/*   Updated: 2022/10/29 16:59:16 by pmitsuko         ###   ########.fr       */
+/*   Updated: 2022/10/29 18:20:49 by pmitsuko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,12 @@ typedef enum e_boolean
 	TRUE
 }	t_boolean;
 
+typedef enum e_mutex
+{
+	PRINT,
+	NUM_MUTEX
+}	t_mutex;
+
 typedef struct s_data
 {
 	int				number_philo;
@@ -47,6 +53,7 @@ typedef struct s_data
 	int				time_eat;
 	int				time_sleep;
 	int				number_must_eat;
+	pthread_mutex_t	*mutex;
 	pthread_mutex_t	*forks;
 }	t_data;
 
@@ -62,7 +69,10 @@ int		check_arg(int argc, char **argv);
 int		save_arg(int argc, char **argv, t_data *data);
 
 int		init_forks(t_data *data);
+int		init_mutex(t_data *data);
 int		init_philo(t_data *data, t_philo **philo);
+
+int		simulator(t_data *data, t_philo *philo);
 
 int		msg_error(char *msg);
 

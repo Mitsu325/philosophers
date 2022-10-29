@@ -6,7 +6,7 @@
 /*   By: pmitsuko <pmitsuko@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 16:19:34 by pmitsuko          #+#    #+#             */
-/*   Updated: 2022/10/29 17:30:10 by pmitsuko         ###   ########.fr       */
+/*   Updated: 2022/10/29 18:30:45 by pmitsuko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,9 @@ static void	destroy_mutex(t_data *data)
 	i = -1;
 	while (++i < data->number_philo)
 		pthread_mutex_destroy(&data->forks[i]);
+	i = -1;
+	while (++i < NUM_MUTEX)
+		pthread_mutex_destroy(&data->mutex[i]);
 }
 
 /*	CLEAR_MEMORY
@@ -53,6 +56,11 @@ int	clear_memory(t_data *data, t_philo **philo, int status)
 	{
 		free(data->forks);
 		data->forks = NULL;
+	}
+	if (data->mutex)
+	{
+		free(data->mutex);
+		data->mutex = NULL;
 	}
 	return (status);
 }

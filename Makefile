@@ -6,7 +6,7 @@
 #    By: pmitsuko <pmitsuko@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/20 07:29:43 by pmitsuko          #+#    #+#              #
-#    Updated: 2022/10/29 16:58:06 by pmitsuko         ###   ########.fr        #
+#    Updated: 2022/10/29 17:49:06 by pmitsuko         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,7 +50,8 @@ FILES = main.c\
 		error.c\
 		init_philo.c\
 		clear_mem.c\
-		init_forks.c
+		init_forks.c\
+		simulator.c
 
 # COMPILED_SOURCES #
 
