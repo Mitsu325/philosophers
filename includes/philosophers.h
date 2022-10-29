@@ -6,7 +6,7 @@
 /*   By: pmitsuko <pmitsuko@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 11:30:26 by pmitsuko          #+#    #+#             */
-/*   Updated: 2022/10/29 18:20:49 by pmitsuko         ###   ########.fr       */
+/*   Updated: 2022/10/29 18:48:17 by pmitsuko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,11 @@
 greater than zero"
 # define PHILO_ARG "Synopsis: ./philo [number_of_philosophers] [time_to_die] \
 [time_to_eat] [time_to_sleep] ([number_of_times_each_philosopher_must_eat])"
+# define FORK "has taken a fork"
+# define EAT "is eating"
+# define SLEEP "is sleeping"
+# define THINK "is thinking"
+# define DIED "died"
 
 typedef enum e_exit
 {
