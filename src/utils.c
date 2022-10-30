@@ -6,7 +6,7 @@
 /*   By: pmitsuko <pmitsuko@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 13:10:22 by pmitsuko          #+#    #+#             */
-/*   Updated: 2022/10/29 13:10:32 by pmitsuko         ###   ########.fr       */
+/*   Updated: 2022/10/30 16:38:05 by pmitsuko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,4 +56,42 @@ long	ft_atol(const char *str)
 		str++;
 	}
 	return (number * sign);
+}
+
+/*	MSG_ERROR
+**	------------
+**	DESCRIPTION
+**	Write message to the standard error file descriptor.
+**	PARAMETERS
+**	#1. The output message (msg);
+**	RETURN VALUES
+**	Return 1.
+*/
+int	msg_error(char *msg)
+{
+	put_msg_fd(msg, STDERR_FILENO);
+	return (FAILURE);
+}
+
+/*	PUT_MSG_FD
+**	------------
+**	DESCRIPTION
+**	Write message to the file descriptor and break line.
+**	PARAMETERS
+**	#1. The output message (msg);
+**	#2. The file descriptor (fd);
+**	RETURN VALUES
+**	-
+*/
+void	put_msg_fd(char *s, int fd)
+{
+	int	i;
+
+	i = 0;
+	while (s[i] != '\0')
+	{
+		write(fd, &s[i], 1);
+		i++;
+	}
+	write(fd, "\n", 1);
 }

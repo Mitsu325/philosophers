@@ -6,7 +6,7 @@
 /*   By: pmitsuko <pmitsuko@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 11:29:09 by pmitsuko          #+#    #+#             */
-/*   Updated: 2022/10/29 18:20:34 by pmitsuko         ###   ########.fr       */
+/*   Updated: 2022/10/30 16:33:42 by pmitsuko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	main(int argc, char **argv)
 
 	if (check_arg(argc, argv) == FAILURE)
 		return (FAILURE);
-	save_arg(argc, argv, &data);
+	init_data(argc, argv, &data);
 	if (init_forks(&data) == FAILURE)
 		return (FAILURE);
 	if (init_mutex(&data) == FAILURE)

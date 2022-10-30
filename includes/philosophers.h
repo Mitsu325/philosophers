@@ -6,7 +6,7 @@
 /*   By: pmitsuko <pmitsuko@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 11:30:26 by pmitsuko          #+#    #+#             */
-/*   Updated: 2022/10/30 15:49:32 by pmitsuko         ###   ########.fr       */
+/*   Updated: 2022/10/30 16:47:36 by pmitsuko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,35 +78,62 @@ typedef struct s_philo
 	t_data			*data;
 }	t_philo;
 
+/*
+**	check_arg.c
+*/
 int				check_arg(int argc, char **argv);
-int				save_arg(int argc, char **argv, t_data *data);
 
+/*
+**	init.c
+*/
+int				init_data(int argc, char **argv, t_data *data);
+int				init_philo(t_data *data, t_philo **philo);
 int				init_forks(t_data *data);
 int				init_mutex(t_data *data);
-int				init_philo(t_data *data, t_philo **philo);
 
+/*
+**	simulator.c
+*/
 int				simulator(t_data *data, t_philo *philo);
 
-void			*monitor_dinner(void *arg);
+/*
+**	life_philo.c
+*/
 void			*life_philo(void *arg);
-void			print_log(t_philo *philo, char *msg);
 void			print_msg(t_philo *philo, char *msg);
+void			print_log(t_philo *philo, char *msg);
+
+/*
+**	monitor_dinner.c
+*/
+void			*monitor_dinner(void *arg);
+int				get_amount_meal(t_philo *philo);
+
+/*
+**	fork_halder.c
+*/
 void			hold_fork(t_philo *philo);
 void			drop_fork(t_philo *philo);
 void			*one_philo_hold_fork(t_philo *philo);
-int				get_amount_meal(t_philo *philo);
 
-int				msg_error(char *msg);
-
-int				clear_memory(t_data *data, t_philo **philo, int status);
-
-void			put_msg_fd(char *s, int fd);
-
+/*
+**	time.c
+*/
 long long int	date_now(void);
 long long int	elapsed_time(long long int start_time);
 int				msleep(long long int time_in_ms);
 
+/*
+**	clear_mem.c
+*/
+int				clear_memory(t_data *data, t_philo **philo, int status);
+
+/*
+**	utils.c
+*/
 int				ft_isdigit(int c);
 long			ft_atol(const char *str);
+void			put_msg_fd(char *s, int fd);
+int				msg_error(char *msg);
 
 #endif

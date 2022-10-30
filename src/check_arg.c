@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   arg_handler.c                                      :+:      :+:    :+:   */
+/*   check_arg.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pmitsuko <pmitsuko@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 15:51:03 by pmitsuko          #+#    #+#             */
-/*   Updated: 2022/10/30 15:19:15 by pmitsuko         ###   ########.fr       */
+/*   Updated: 2022/10/30 16:32:01 by pmitsuko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,33 +70,5 @@ int	check_arg(int argc, char **argv)
 		if (i == 5 && num == 0)
 			return (msg_error(ZERO_MUST_EAT));
 	}
-	return (SUCCESS);
-}
-
-/*	SAVE_ARG
-**	------------
-**	DESCRIPTION
-**
-**	PARAMETERS
-**	#1. The number of strings pointed to by argv (argc);
-**	#2. The strings pointed (argv);
-**	#3. The data struct pointed (data);
-**	RETURN VALUES
-**	Return 0 if success and 1 if failure
-*/
-int	save_arg(int argc, char **argv, t_data *data)
-{
-	data->number_philo = (int)ft_atol(argv[1]);
-	data->time_die = (int)ft_atol(argv[2]);
-	data->time_eat = (int)ft_atol(argv[3]);
-	data->time_sleep = (int)ft_atol(argv[4]);
-	data->number_must_eat = -1;
-	if (argc == 6)
-		data->number_must_eat = (int)ft_atol(argv[5]);
-	data->forks = NULL;
-	data->mutex = NULL;
-	data->time_think = 1 + data->time_eat - data->time_sleep;
-	data->create_date = -1;
-	data->end_of_dinner = FALSE;
 	return (SUCCESS);
 }

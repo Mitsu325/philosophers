@@ -6,7 +6,7 @@
 #    By: pmitsuko <pmitsuko@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/20 07:29:43 by pmitsuko          #+#    #+#              #
-#    Updated: 2022/10/30 15:21:09 by pmitsuko         ###   ########.fr        #
+#    Updated: 2022/10/30 16:48:46 by pmitsuko         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,18 +44,15 @@ VPATH = $(SRC_DIR)
 # FILES #
 
 FILES = main.c\
-		arg_handler.c\
-		put_msg.c\
-		utils.c\
-		error.c\
-		init_philo.c\
+		check_arg.c\
 		clear_mem.c\
-		init_forks.c\
+		fork_handler.c\
+		init.c\
+		life_philo.c\
+		monitor_dinner.c\
 		simulator.c\
 		time.c\
-		fork_handler.c\
-		life_philo.c\
-		monitor_dinner.c
+		utils.c
 
 # COMPILED_SOURCES #
 
