@@ -6,7 +6,7 @@
 /*   By: pmitsuko <pmitsuko@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/30 10:34:19 by pmitsuko          #+#    #+#             */
-/*   Updated: 2022/10/30 15:48:10 by pmitsuko         ###   ########.fr       */
+/*   Updated: 2022/10/30 17:45:30 by pmitsuko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static int	end_of_dinner(t_philo *philo)
 void	print_msg(t_philo *philo, char *msg)
 {
 	pthread_mutex_lock(&philo->data->mutex[PRINT]);
-	printf("%6lld %4d %s\n", elapsed_time(philo->data->create_date),
+	printf("%lld %d %s\n", elapsed_time(philo->data->create_date),
 		philo->id, msg);
 	pthread_mutex_unlock(&philo->data->mutex[PRINT]);
 }
@@ -109,7 +109,9 @@ void	*life_philo(void *arg)
 		eat(philo);
 		if (get_amount_meal(philo) == philo->data->number_must_eat)
 		{
+			print_log(philo, SLEEP);
 			drop_fork(philo);
+			msleep(philo->data->time_sleep);
 			return (NULL);
 		}
 		print_log(philo, SLEEP);
