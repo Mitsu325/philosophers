@@ -6,7 +6,7 @@
 /*   By: pmitsuko <pmitsuko@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/30 10:37:57 by pmitsuko          #+#    #+#             */
-/*   Updated: 2022/10/30 11:08:40 by pmitsuko         ###   ########.fr       */
+/*   Updated: 2022/10/30 11:26:10 by pmitsuko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 **	RETURN VALUES
 **	Return the eat counter.
 */
-static int	get_amount_meal(t_philo *philo)
+int	get_amount_meal(t_philo *philo)
 {
 	int	amount_meal;
 
@@ -77,8 +77,5 @@ void	*monitor_dinner(void *arg)
 	{
 		msleep(1);
 	}
-	pthread_mutex_lock(&philo->data->mutex[END_DINNER]);
-	philo->data->end_of_dinner = TRUE;
-	pthread_mutex_unlock(&philo->data->mutex[END_DINNER]);
 	return (NULL);
 }
