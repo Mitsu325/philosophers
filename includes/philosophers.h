@@ -6,7 +6,7 @@
 /*   By: pmitsuko <pmitsuko@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 11:30:26 by pmitsuko          #+#    #+#             */
-/*   Updated: 2022/10/29 20:06:32 by pmitsuko         ###   ########.fr       */
+/*   Updated: 2022/10/30 10:38:23 by pmitsuko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ typedef enum e_boolean
 typedef enum e_mutex
 {
 	PRINT,
+	MEALS,
+	END_DINNER,
 	NUM_MUTEX
 }	t_mutex;
 
@@ -59,6 +61,7 @@ typedef struct s_data
 	int				time_eat;
 	int				time_sleep;
 	int				number_must_eat;
+	int				end_of_dinner;
 	long long int	create_date;
 	pthread_mutex_t	*mutex;
 	pthread_mutex_t	*forks;
@@ -66,10 +69,11 @@ typedef struct s_data
 
 typedef struct s_philo
 {
-	int		id;
-	int		l_fork;
-	int		r_fork;
-	t_data	*data;
+	int				id;
+	int				l_fork;
+	int				r_fork;
+	unsigned int	eat_counter;
+	t_data			*data;
 }	t_philo;
 
 int				check_arg(int argc, char **argv);
@@ -81,6 +85,8 @@ int				init_philo(t_data *data, t_philo **philo);
 
 int				simulator(t_data *data, t_philo *philo);
 
+void			*monitor_dinner(void *arg);
+void			*life_philo(void *arg);
 void			print_log(t_philo *philo, char *msg);
 void			hold_fork(t_philo *philo);
 void			drop_fork(t_philo *philo);

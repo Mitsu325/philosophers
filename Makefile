@@ -6,7 +6,7 @@
 #    By: pmitsuko <pmitsuko@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/20 07:29:43 by pmitsuko          #+#    #+#              #
-#    Updated: 2022/10/29 20:04:03 by pmitsuko         ###   ########.fr        #
+#    Updated: 2022/10/30 10:38:55 by pmitsuko         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,7 +53,9 @@ FILES = main.c\
 		init_forks.c\
 		simulator.c\
 		time.c\
-		fork_handler.c
+		fork_handler.c\
+		life_philo.c\
+		monitor_dinner.c
 
 # COMPILED_SOURCES #
 
@@ -96,9 +98,9 @@ re: fclean all
 ## TESTS ##
 
 valgrind: re
-	@valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./philo 2 100 80 20
+	@valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./philo 2 100 50 20 1
 
 helgrind: re
-	@valgrind --tool=helgrind ./philo 2 100 80 20
+	@valgrind --tool=helgrind ./philo 2 100 50 20 1
 
 .PHONY: all clean fclean re
