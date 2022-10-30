@@ -6,7 +6,7 @@
 /*   By: pmitsuko <pmitsuko@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/30 10:34:19 by pmitsuko          #+#    #+#             */
-/*   Updated: 2022/10/30 15:12:13 by pmitsuko         ###   ########.fr       */
+/*   Updated: 2022/10/30 15:26:13 by pmitsuko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,16 @@ static int	end_of_dinner(t_philo *philo)
 	return (end_dinner);
 }
 
+/*	PRINT_MSG
+**	------------
+**	DESCRIPTION
+**	Write in format: timestamp (ms) Philosopher id activity.
+**	PARAMETERS
+**	#1. The philo struct pointer (philo);
+**	#2. The message (msg);
+**	RETURN VALUES
+**	-
+*/
 void	print_msg(t_philo *philo, char *msg)
 {
 	pthread_mutex_lock(&philo->data->mutex[PRINT]);
@@ -61,7 +71,7 @@ void	print_msg(t_philo *philo, char *msg)
 /*	PRINT_LOG
 **	------------
 **	DESCRIPTION
-**	Write log in format: timestamp (ms) Philosopher id activity.
+**	Check the end of dinner and print the log.
 **	PARAMETERS
 **	#1. The philo struct pointer (philo);
 **	#2. The message (msg);

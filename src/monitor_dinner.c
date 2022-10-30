@@ -6,7 +6,7 @@
 /*   By: pmitsuko <pmitsuko@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/30 10:37:57 by pmitsuko          #+#    #+#             */
-/*   Updated: 2022/10/30 15:00:54 by pmitsuko         ###   ########.fr       */
+/*   Updated: 2022/10/30 15:32:13 by pmitsuko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,16 @@ static int	all_philo_ate(t_philo *philo)
 	return (FALSE);
 }
 
-long long int	get_last_meal_time(t_philo *philo)
+/*	GET_LAST_MEAL_TIME
+**	------------
+**	DESCRIPTION
+**	Returns a philo's last meal time.
+**	PARAMETERS
+**	#1. The philo struct pointer (philo);
+**	RETURN VALUES
+**	Return the last meal time.
+*/
+static long long int	get_last_meal_time(t_philo *philo)
 {
 	long long int	last_meal_time;
 
@@ -69,14 +78,24 @@ long long int	get_last_meal_time(t_philo *philo)
 	return (last_meal_time);
 }
 
-int	check_philo_die(t_philo *philo)
+/*	CHECK_PHILO_DIE
+**	------------
+**	DESCRIPTION
+**	Check if a philo has died.
+**	PARAMETERS
+**	#1. The philo struct pointer (philo);
+**	RETURN VALUES
+**	Return 1 if philo died and 0 if not.
+*/
+static int	check_philo_die(t_philo *philo)
 {
 	int	i;
 
 	i = -1;
 	while (++i < philo->data->number_philo)
 	{
-		if ((elapsed_time(philo->data->create_date) - get_last_meal_time(&philo[i])) > philo->data->time_die)
+		if ((elapsed_time(philo->data->create_date)
+				- get_last_meal_time(&philo[i])) > philo->data->time_die)
 		{
 			pthread_mutex_lock(&philo->data->mutex[END_DINNER]);
 			philo->data->end_of_dinner = TRUE;
@@ -106,6 +125,7 @@ void	*monitor_dinner(void *arg)
 	{
 		if (check_philo_die(philo))
 			return (NULL);
+		msleep(1);
 	}
 	return (NULL);
 }
