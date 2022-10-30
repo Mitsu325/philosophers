@@ -6,7 +6,7 @@
 /*   By: pmitsuko <pmitsuko@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 20:02:51 by pmitsuko          #+#    #+#             */
-/*   Updated: 2022/10/29 21:03:57 by pmitsuko         ###   ########.fr       */
+/*   Updated: 2022/10/30 15:52:56 by pmitsuko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,23 @@ void	hold_fork(t_philo *philo)
 	pthread_mutex_lock(&philo->data->forks[max_fork(philo->l_fork,
 			philo->r_fork)]);
 	print_log(philo, FORK);
+}
+
+/*	ONE_PHILO_HOLD_FORK
+**	------------
+**	DESCRIPTION
+**	Hold the one fork and then drop.
+**	PARAMETERS
+**	#1. The philo struct pointed (philo);
+**	RETURN VALUES
+**	-
+*/
+void	*one_philo_hold_fork(t_philo *philo)
+{
+	pthread_mutex_lock(&philo->data->forks[philo->l_fork]);
+	print_log(philo, FORK);
+	pthread_mutex_unlock(&philo->data->forks[philo->l_fork]);
+	return (NULL);
 }
 
 /*	DROP_FORK

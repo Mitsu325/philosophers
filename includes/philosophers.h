@@ -6,7 +6,7 @@
 /*   By: pmitsuko <pmitsuko@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 11:30:26 by pmitsuko          #+#    #+#             */
-/*   Updated: 2022/10/30 15:10:05 by pmitsuko         ###   ########.fr       */
+/*   Updated: 2022/10/30 15:49:32 by pmitsuko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ void			print_log(t_philo *philo, char *msg);
 void			print_msg(t_philo *philo, char *msg);
 void			hold_fork(t_philo *philo);
 void			drop_fork(t_philo *philo);
+void			*one_philo_hold_fork(t_philo *philo);
 int				get_amount_meal(t_philo *philo);
 
 int				msg_error(char *msg);
