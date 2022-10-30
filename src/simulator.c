@@ -6,65 +6,39 @@
 /*   By: pmitsuko <pmitsuko@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 17:36:51 by pmitsuko          #+#    #+#             */
-/*   Updated: 2022/10/29 19:55:41 by pmitsuko         ###   ########.fr       */
+/*   Updated: 2022/10/29 21:08:48 by pmitsuko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-long long int	date_now(void)
-{
-	struct timeval	time;
-
-	gettimeofday(&time, NULL);
-	return (time.tv_sec * 1000 + time.tv_usec / 1000);
-}
-
-long long int	elapsed_time(long long int start_time)
-{
-	return ((date_now() - start_time));
-}
-
-int	msleep(long long int time_in_ms)
-{
-	return (usleep(time_in_ms * 1000));
-}
-
+/*	PRINT_LOG
+**	------------
+**	DESCRIPTION
+**	Write log in format: timestamp (ms) Philosopher id activity.
+**	PARAMETERS
+**	#1. The philo struct pointer (philo);
+**	#2. The message (msg);
+**	RETURN VALUES
+**	-
+*/
 void	print_log(t_philo *philo, char *msg)
 {
 	pthread_mutex_lock(&philo->data->mutex[PRINT]);
-	printf("%lld Philosopher %d %s\n", elapsed_time(philo->data->create_date), philo->id, msg);
+	printf("%lld Philosopher %d %s\n", elapsed_time(philo->data->create_date),
+		philo->id, msg);
 	pthread_mutex_unlock(&philo->data->mutex[PRINT]);
 }
 
-int	min_fork(int l_fork, int r_fork)
-{
-	if (l_fork < r_fork)
-		return (l_fork);
-	return (r_fork);
-}
-
-int	max_fork(int l_fork, int r_fork)
-{
-	if (l_fork > r_fork)
-		return (l_fork);
-	return (r_fork);
-}
-
-void	hold_fork(t_philo *philo)
-{
-	pthread_mutex_lock(&philo->data->forks[min_fork(philo->l_fork, philo->r_fork)]);
-	print_log(philo, FORK);
-	pthread_mutex_lock(&philo->data->forks[max_fork(philo->l_fork, philo->r_fork)]);
-	print_log(philo, FORK);
-}
-
-void	drop_fork(t_philo *philo)
-{
-	pthread_mutex_unlock(&philo->data->forks[min_fork(philo->l_fork, philo->r_fork)]);
-	pthread_mutex_unlock(&philo->data->forks[max_fork(philo->l_fork, philo->r_fork)]);
-}
-
+/*	LIFE_FILE
+**	------------
+**	DESCRIPTION
+**	The life of a philo: eating, sleeping and thinking.
+**	PARAMETERS
+**	#1. The philo struct pointer (arg);
+**	RETURN VALUES
+**	Return NULL
+*/
 void	*life_philo(void *arg)
 {
 	t_philo	*philo;
@@ -82,6 +56,16 @@ void	*life_philo(void *arg)
 	return (NULL);
 }
 
+/*	SIMULATOR
+**	------------
+**	DESCRIPTION
+**	Thread creation to simulate philosophers dinner.
+**	PARAMETERS
+**	#1. The data struct pointer (data);
+**	#2. The philo struct pointer (philo);
+**	RETURN VALUES
+**	Return 0 if success and 0 if not.
+*/
 int	simulator(t_data *data, t_philo *philo)
 {
 	pthread_t	*thread;

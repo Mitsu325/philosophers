@@ -6,7 +6,7 @@
 /*   By: pmitsuko <pmitsuko@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 11:30:26 by pmitsuko          #+#    #+#             */
-/*   Updated: 2022/10/29 19:48:18 by pmitsuko         ###   ########.fr       */
+/*   Updated: 2022/10/29 20:06:32 by pmitsuko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,22 +72,30 @@ typedef struct s_philo
 	t_data	*data;
 }	t_philo;
 
-int		check_arg(int argc, char **argv);
-int		save_arg(int argc, char **argv, t_data *data);
+int				check_arg(int argc, char **argv);
+int				save_arg(int argc, char **argv, t_data *data);
 
-int		init_forks(t_data *data);
-int		init_mutex(t_data *data);
-int		init_philo(t_data *data, t_philo **philo);
+int				init_forks(t_data *data);
+int				init_mutex(t_data *data);
+int				init_philo(t_data *data, t_philo **philo);
 
-int		simulator(t_data *data, t_philo *philo);
+int				simulator(t_data *data, t_philo *philo);
 
-int		msg_error(char *msg);
+void			print_log(t_philo *philo, char *msg);
+void			hold_fork(t_philo *philo);
+void			drop_fork(t_philo *philo);
 
-int		clear_memory(t_data *data, t_philo **philo, int status);
+int				msg_error(char *msg);
 
-void	put_msg_fd(char *s, int fd);
+int				clear_memory(t_data *data, t_philo **philo, int status);
 
-int		ft_isdigit(int c);
-long	ft_atol(const char *str);
+void			put_msg_fd(char *s, int fd);
+
+long long int	date_now(void);
+long long int	elapsed_time(long long int start_time);
+int				msleep(long long int time_in_ms);
+
+int				ft_isdigit(int c);
+long			ft_atol(const char *str);
 
 #endif
