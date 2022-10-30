@@ -6,7 +6,7 @@
 #    By: pmitsuko <pmitsuko@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/20 07:29:43 by pmitsuko          #+#    #+#              #
-#    Updated: 2022/10/30 10:38:55 by pmitsuko         ###   ########.fr        #
+#    Updated: 2022/10/30 15:21:09 by pmitsuko         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -98,9 +98,9 @@ re: fclean all
 ## TESTS ##
 
 valgrind: re
-	@valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./philo 2 100 50 20 1
+	@valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./philo 3 200 100 100 7
 
 helgrind: re
-	@valgrind --tool=helgrind ./philo 2 100 50 20 1
+	@valgrind --tool=helgrind ./philo 3 200 100 100 7
 
 .PHONY: all clean fclean re

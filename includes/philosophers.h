@@ -6,7 +6,7 @@
 /*   By: pmitsuko <pmitsuko@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 11:30:26 by pmitsuko          #+#    #+#             */
-/*   Updated: 2022/10/30 11:26:06 by pmitsuko         ###   ########.fr       */
+/*   Updated: 2022/10/30 15:10:05 by pmitsuko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ typedef struct s_data
 	int				time_die;
 	int				time_eat;
 	int				time_sleep;
+	int				time_think;
 	int				number_must_eat;
 	int				end_of_dinner;
 	long long int	create_date;
@@ -73,6 +74,7 @@ typedef struct s_philo
 	int				l_fork;
 	int				r_fork;
 	unsigned int	eat_counter;
+	long long int	last_eat_date;
 	t_data			*data;
 }	t_philo;
 
@@ -88,6 +90,7 @@ int				simulator(t_data *data, t_philo *philo);
 void			*monitor_dinner(void *arg);
 void			*life_philo(void *arg);
 void			print_log(t_philo *philo, char *msg);
+void			print_msg(t_philo *philo, char *msg);
 void			hold_fork(t_philo *philo);
 void			drop_fork(t_philo *philo);
 int				get_amount_meal(t_philo *philo);

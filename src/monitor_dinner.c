@@ -6,7 +6,7 @@
 /*   By: pmitsuko <pmitsuko@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/30 10:37:57 by pmitsuko          #+#    #+#             */
-/*   Updated: 2022/10/30 11:26:10 by pmitsuko         ###   ########.fr       */
+/*   Updated: 2022/10/30 15:00:54 by pmitsuko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ static int	all_philo_ate(t_philo *philo)
 	int	i;
 	int	philo_ate;
 
+	if (philo->data->number_must_eat < 0)
+		return (FALSE);
 	i = -1;
 	philo_ate = 0;
 	while (++i < philo->data->number_philo)
@@ -54,6 +56,35 @@ static int	all_philo_ate(t_philo *philo)
 	}
 	if (philo_ate == philo->data->number_philo)
 		return (TRUE);
+	return (FALSE);
+}
+
+long long int	get_last_meal_time(t_philo *philo)
+{
+	long long int	last_meal_time;
+
+	pthread_mutex_lock(&philo->data->mutex[MEALS]);
+	last_meal_time = philo->last_eat_date;
+	pthread_mutex_unlock(&philo->data->mutex[MEALS]);
+	return (last_meal_time);
+}
+
+int	check_philo_die(t_philo *philo)
+{
+	int	i;
+
+	i = -1;
+	while (++i < philo->data->number_philo)
+	{
+		if ((elapsed_time(philo->data->create_date) - get_last_meal_time(&philo[i])) > philo->data->time_die)
+		{
+			pthread_mutex_lock(&philo->data->mutex[END_DINNER]);
+			philo->data->end_of_dinner = TRUE;
+			pthread_mutex_unlock(&philo->data->mutex[END_DINNER]);
+			print_msg(&philo[i], DIED);
+			return (TRUE);
+		}
+	}
 	return (FALSE);
 }
 
@@ -71,11 +102,10 @@ void	*monitor_dinner(void *arg)
 	t_philo	*philo;
 
 	philo = (t_philo *)arg;
-	if (philo->data->number_must_eat < 0)
-		return (NULL);
 	while (!all_philo_ate(philo))
 	{
-		msleep(1);
+		if (check_philo_die(philo))
+			return (NULL);
 	}
 	return (NULL);
 }

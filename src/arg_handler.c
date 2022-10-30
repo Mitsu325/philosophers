@@ -6,7 +6,7 @@
 /*   By: pmitsuko <pmitsuko@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 15:51:03 by pmitsuko          #+#    #+#             */
-/*   Updated: 2022/10/29 23:03:27 by pmitsuko         ###   ########.fr       */
+/*   Updated: 2022/10/30 15:19:15 by pmitsuko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ int	save_arg(int argc, char **argv, t_data *data)
 		data->number_must_eat = (int)ft_atol(argv[5]);
 	data->forks = NULL;
 	data->mutex = NULL;
+	data->time_think = 1 + data->time_eat - data->time_sleep;
 	data->create_date = -1;
 	data->end_of_dinner = FALSE;
 	return (SUCCESS);

@@ -6,7 +6,7 @@
 /*   By: pmitsuko <pmitsuko@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/30 10:34:19 by pmitsuko          #+#    #+#             */
-/*   Updated: 2022/10/30 11:28:27 by pmitsuko         ###   ########.fr       */
+/*   Updated: 2022/10/30 15:12:13 by pmitsuko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ static void	eat(t_philo *philo)
 	print_log(philo, EAT);
 	pthread_mutex_lock(&philo->data->mutex[MEALS]);
 	philo->eat_counter++;
+	philo->last_eat_date = elapsed_time(philo->data->create_date);
 	pthread_mutex_unlock(&philo->data->mutex[MEALS]);
 	msleep(philo->data->time_eat);
 }
@@ -49,6 +50,14 @@ static int	end_of_dinner(t_philo *philo)
 	return (end_dinner);
 }
 
+void	print_msg(t_philo *philo, char *msg)
+{
+	pthread_mutex_lock(&philo->data->mutex[PRINT]);
+	printf("%6lld %4d %s\n", elapsed_time(philo->data->create_date),
+		philo->id, msg);
+	pthread_mutex_unlock(&philo->data->mutex[PRINT]);
+}
+
 /*	PRINT_LOG
 **	------------
 **	DESCRIPTION
@@ -63,10 +72,7 @@ void	print_log(t_philo *philo, char *msg)
 {
 	if (end_of_dinner(philo))
 		return ;
-	pthread_mutex_lock(&philo->data->mutex[PRINT]);
-	printf("%6lld %4d %s\n", elapsed_time(philo->data->create_date),
-		philo->id, msg);
-	pthread_mutex_unlock(&philo->data->mutex[PRINT]);
+	print_msg(philo, msg);
 }
 
 /*	LIFE_FILE
@@ -98,6 +104,7 @@ void	*life_philo(void *arg)
 		drop_fork(philo);
 		msleep(philo->data->time_sleep);
 		print_log(philo, THINK);
+		msleep(philo->data->time_think);
 	}
 	return (NULL);
 }
