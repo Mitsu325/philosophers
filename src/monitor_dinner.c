@@ -6,7 +6,7 @@
 /*   By: pmitsuko <pmitsuko@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/30 10:37:57 by pmitsuko          #+#    #+#             */
-/*   Updated: 2022/10/30 10:53:02 by pmitsuko         ###   ########.fr       */
+/*   Updated: 2022/10/30 11:08:40 by pmitsuko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,15 +73,12 @@ void	*monitor_dinner(void *arg)
 	philo = (t_philo *)arg;
 	if (philo->data->number_must_eat < 0)
 		return (NULL);
-	while (1)
+	while (!all_philo_ate(philo))
 	{
-		if (all_philo_ate(philo))
-		{
-			pthread_mutex_lock(&philo->data->mutex[END_DINNER]);
-			philo->data->end_of_dinner = TRUE;
-			pthread_mutex_unlock(&philo->data->mutex[END_DINNER]);
-			return (NULL);
-		}
+		msleep(1);
 	}
+	pthread_mutex_lock(&philo->data->mutex[END_DINNER]);
+	philo->data->end_of_dinner = TRUE;
+	pthread_mutex_unlock(&philo->data->mutex[END_DINNER]);
 	return (NULL);
 }
