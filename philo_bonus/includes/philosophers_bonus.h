@@ -6,7 +6,7 @@
 /*   By: pmitsuko <pmitsuko@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 09:53:37 by pmitsuko          #+#    #+#             */
-/*   Updated: 2022/11/02 09:54:31 by pmitsuko         ###   ########.fr       */
+/*   Updated: 2022/11/02 10:03:01 by pmitsuko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,28 @@ typedef enum e_boolean
 	FALSE,
 	TRUE
 }	t_boolean;
+
+typedef struct s_data
+{
+	int				number_philo;
+	int				time_die;
+	int				time_eat;
+	int				time_sleep;
+	int				time_think;
+	int				number_must_eat;
+}	t_data;
+
+/*
+**	check_arg.c
+*/
+int				check_arg(int argc, char **argv);
+
+/*
+**	utils.c
+*/
+int				ft_isdigit(int c);
+long			ft_atol(const char *str);
+void			put_msg_fd(char *s, int fd);
+int				msg_error(char *msg);
 
 #endif

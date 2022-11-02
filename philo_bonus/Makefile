@@ -6,7 +6,7 @@
 #    By: pmitsuko <pmitsuko@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/20 07:29:43 by pmitsuko          #+#    #+#              #
-#    Updated: 2022/11/02 09:52:19 by pmitsuko         ###   ########.fr        #
+#    Updated: 2022/11/02 10:03:13 by pmitsuko         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,7 +43,9 @@ VPATH = $(SRC_DIR)
 
 # FILES #
 
-FILES = main.c\
+FILES = main_bonus.c\
+		check_arg_bonus.c\
+		utils_bonus.c
 
 # COMPILED_SOURCES #
 
