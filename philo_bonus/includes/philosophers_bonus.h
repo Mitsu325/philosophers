@@ -6,7 +6,7 @@
 /*   By: pmitsuko <pmitsuko@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 09:53:37 by pmitsuko          #+#    #+#             */
-/*   Updated: 2022/11/02 10:03:01 by pmitsuko         ###   ########.fr       */
+/*   Updated: 2022/11/02 10:13:55 by pmitsuko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,11 @@ typedef struct s_data
 **	check_arg.c
 */
 int				check_arg(int argc, char **argv);
+
+/*
+**	init.c
+*/
+int				init_data(int argc, char **argv, t_data *data);
 
 /*
 **	utils.c
