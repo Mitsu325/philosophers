@@ -6,7 +6,7 @@
 /*   By: pmitsuko <pmitsuko@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 11:30:26 by pmitsuko          #+#    #+#             */
-/*   Updated: 2022/10/30 16:47:36 by pmitsuko         ###   ########.fr       */
+/*   Updated: 2022/11/02 15:02:59 by pmitsuko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ typedef struct s_philo
 	int				id;
 	int				l_fork;
 	int				r_fork;
-	unsigned int	eat_counter;
+	int				eat_counter;
 	long long int	last_eat_date;
 	t_data			*data;
 }	t_philo;

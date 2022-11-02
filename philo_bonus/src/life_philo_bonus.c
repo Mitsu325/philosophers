@@ -6,7 +6,7 @@
 /*   By: pmitsuko <pmitsuko@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 11:58:03 by pmitsuko          #+#    #+#             */
-/*   Updated: 2022/11/02 12:21:22 by pmitsuko         ###   ########.fr       */
+/*   Updated: 2022/11/02 15:00:52 by pmitsuko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void	drop_fork(t_philo *philo)
 static void	eat(t_philo *philo)
 {
 	print_log(philo, EAT);
+	philo->eat_counter++;
 	msleep(philo->data->time_eat);
 }
 
@@ -56,12 +57,22 @@ int	life_philo(t_philo *philo)
 {
 	if (philo->id % 2 == 0)
 		msleep(5);
-	hold_fork(philo);
-	eat(philo);
-	print_log(philo, SLEEP);
-	drop_fork(philo);
-	msleep(philo->data->time_sleep);
-	print_log(philo, THINK);
-	msleep(philo->data->time_think);
+	while (1)
+	{
+		hold_fork(philo);
+		eat(philo);
+		if (philo->eat_counter == philo->data->number_must_eat)
+		{
+			print_log(philo, SLEEP);
+			drop_fork(philo);
+			msleep(philo->data->time_sleep);
+			return (SUCCESS);
+		}
+		print_log(philo, SLEEP);
+		drop_fork(philo);
+		msleep(philo->data->time_sleep);
+		print_log(philo, THINK);
+		msleep(philo->data->time_think);
+	}
 	return (SUCCESS);
 }

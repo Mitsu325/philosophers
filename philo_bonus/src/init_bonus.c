@@ -6,7 +6,7 @@
 /*   By: pmitsuko <pmitsuko@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 10:07:43 by pmitsuko          #+#    #+#             */
-/*   Updated: 2022/11/02 14:31:00 by pmitsuko         ###   ########.fr       */
+/*   Updated: 2022/11/02 14:56:24 by pmitsuko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ int	init_philo(t_data *data, t_philo **philo)
 	while (++i < data->number_philo)
 	{
 		(*philo)[i].id = i + 1;
+		(*philo)[i].eat_counter = 0;
 		(*philo)[i].data = data;
 	}
 	return (SUCCESS);

@@ -6,7 +6,7 @@
 /*   By: pmitsuko <pmitsuko@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 09:53:37 by pmitsuko          #+#    #+#             */
-/*   Updated: 2022/11/02 14:30:49 by pmitsuko         ###   ########.fr       */
+/*   Updated: 2022/11/02 15:01:01 by pmitsuko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ typedef struct s_philo
 {
 	int				id;
 	pid_t			pid;
+	int				eat_counter;
 	t_data			*data;
 }	t_philo;
 
