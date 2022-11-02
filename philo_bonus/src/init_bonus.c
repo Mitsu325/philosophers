@@ -6,7 +6,7 @@
 /*   By: pmitsuko <pmitsuko@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 10:07:43 by pmitsuko          #+#    #+#             */
-/*   Updated: 2022/11/02 10:08:13 by pmitsuko         ###   ########.fr       */
+/*   Updated: 2022/11/02 10:59:56 by pmitsuko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,25 @@ int	init_data(int argc, char **argv, t_data *data)
 	if (argc == 6)
 		data->number_must_eat = (int)ft_atol(argv[5]);
 	data->time_think = 1 + data->time_eat - data->time_sleep;
+	data->forks = NULL;
+	return (SUCCESS);
+}
+
+/*	INIT_FORKS
+**	------------
+**	DESCRIPTION
+**	Initialize values from forks and semaphore open.
+**	PARAMETERS
+**	#1. The data struct pointed (data);
+**	RETURN VALUES
+**	Return 0 is success and 1 if not.
+*/
+int	init_forks(t_data *data)
+{
+	if (sem_unlink("forks"))
+		return (FAILURE);
+	data->forks = sem_open("forks", O_CREAT, 0666, data->number_philo);
+	if (data->forks == NULL)
+		return (FAILURE);
 	return (SUCCESS);
 }
