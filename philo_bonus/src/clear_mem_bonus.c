@@ -6,7 +6,7 @@
 /*   By: pmitsuko <pmitsuko@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 11:04:12 by pmitsuko          #+#    #+#             */
-/*   Updated: 2022/11/02 11:10:03 by pmitsuko         ###   ########.fr       */
+/*   Updated: 2022/11/02 11:16:50 by pmitsuko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,13 @@ static void	close_semaphore(t_data *data)
 **	RETURN VALUES
 **	Return status value.
 */
-int	clear_memory(t_data *data, int status)
+int	clear_memory(t_data *data, t_philo **philo, int status)
 {
 	close_semaphore(data);
+	if (*philo)
+	{
+		free(*philo);
+		*philo = NULL;
+	}
 	return (status);
 }

@@ -6,7 +6,7 @@
 /*   By: pmitsuko <pmitsuko@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 10:07:43 by pmitsuko          #+#    #+#             */
-/*   Updated: 2022/11/02 10:59:56 by pmitsuko         ###   ########.fr       */
+/*   Updated: 2022/11/02 11:25:42 by pmitsuko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,33 @@ int	init_data(int argc, char **argv, t_data *data)
 	data->forks = NULL;
 	return (SUCCESS);
 }
+
+/*	INIT_PHILO
+**	------------
+**	DESCRIPTION
+**	Initialize values from philo struct.
+**	PARAMETERS
+**	#1. The data struct pointed (data);
+**	#2. The philo struct pointed (philo);
+**	RETURN VALUES
+**	Return 0 is success and 1 if not.
+*/
+int	init_philo(t_data *data, t_philo **philo)
+{
+	int	i;
+
+	*philo = (t_philo *)malloc(sizeof(t_philo) * data->number_philo);
+	if (*philo == NULL)
+		return (FAILURE);
+	i = -1;
+	while (++i < data->number_philo)
+	{
+		(*philo)[i].id = i + 1;
+		(*philo)[i].data = data;
+	}
+	return (SUCCESS);
+}
+
 
 /*	INIT_FORKS
 **	------------

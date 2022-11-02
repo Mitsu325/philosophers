@@ -6,7 +6,7 @@
 /*   By: pmitsuko <pmitsuko@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 09:53:37 by pmitsuko          #+#    #+#             */
-/*   Updated: 2022/11/02 11:06:35 by pmitsuko         ###   ########.fr       */
+/*   Updated: 2022/11/02 11:17:55 by pmitsuko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,12 @@ typedef struct s_data
 	sem_t			*forks;
 }	t_data;
 
+typedef struct s_philo
+{
+	int				id;
+	t_data			*data;
+}	t_philo;
+
 /*
 **	check_arg.c
 */
@@ -68,12 +74,13 @@ int				check_arg(int argc, char **argv);
 **	init.c
 */
 int				init_data(int argc, char **argv, t_data *data);
+int				init_philo(t_data *data, t_philo **philo);
 int				init_forks(t_data *data);
 
 /*
 **	clear_mem.c
 */
-int				clear_memory(t_data *data, int status);
+int				clear_memory(t_data *data, t_philo **philo, int status);
 
 /*
 **	utils.c
