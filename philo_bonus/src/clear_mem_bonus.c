@@ -6,7 +6,7 @@
 /*   By: pmitsuko <pmitsuko@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 11:04:12 by pmitsuko          #+#    #+#             */
-/*   Updated: 2022/11/02 11:16:50 by pmitsuko         ###   ########.fr       */
+/*   Updated: 2022/11/02 14:04:02 by pmitsuko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@
 **	RETURN VALUES
 **	-
 */
-static void	close_semaphore(t_data *data)
+void	close_semaphore(t_data *data)
 {
-	if (data->forks != NULL)
-		sem_close(data->forks);
+	sem_close(data->forks);
+	sem_unlink("/forks");
 }
 
 /*	CLEAR_MEMORY

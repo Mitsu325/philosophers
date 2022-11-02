@@ -6,7 +6,7 @@
 #    By: pmitsuko <pmitsuko@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/20 07:29:43 by pmitsuko          #+#    #+#              #
-#    Updated: 2022/11/02 11:10:21 by pmitsuko         ###   ########.fr        #
+#    Updated: 2022/11/02 12:12:48 by pmitsuko         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,6 +47,9 @@ FILES = main_bonus.c\
 		check_arg_bonus.c\
 		clear_mem_bonus.c\
 		init_bonus.c\
+		life_philo_bonus.c\
+		simulator_bonus.c\
+		time_bonus.c\
 		utils_bonus.c
 
 # COMPILED_SOURCES #
@@ -90,9 +93,9 @@ re: fclean all
 ## TESTS ##
 
 valgrind: re
-	@valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./philo_bonus 3 200 100 100 7
+	@valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./philo_bonus 2 200 100 20
 
 helgrind: re
-	@valgrind --tool=helgrind ./philo_bonus 3 200 100 100 7
+	@valgrind --tool=helgrind ./philo_bonus 2 200 100 20
 
 .PHONY: all clean fclean re

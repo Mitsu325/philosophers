@@ -6,7 +6,7 @@
 /*   By: pmitsuko <pmitsuko@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 09:55:25 by pmitsuko          #+#    #+#             */
-/*   Updated: 2022/11/02 11:26:21 by pmitsuko         ###   ########.fr       */
+/*   Updated: 2022/11/02 14:16:58 by pmitsuko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ int	main(int argc, char **argv)
 		return (FAILURE);
 	philo = NULL;
 	if (init_philo(&data, &philo) == FAILURE)
+		return (clear_memory(&data, &philo, FAILURE));
+	if (simulator(&data, philo) == FAILURE)
 		return (clear_memory(&data, &philo, FAILURE));
 	return (clear_memory(&data, &philo, SUCCESS));
 }

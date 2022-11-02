@@ -6,7 +6,7 @@
 /*   By: pmitsuko <pmitsuko@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 09:53:37 by pmitsuko          #+#    #+#             */
-/*   Updated: 2022/11/02 11:17:55 by pmitsuko         ###   ########.fr       */
+/*   Updated: 2022/11/02 14:30:49 by pmitsuko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 # include <stdlib.h>
 # include <stdio.h>
 # include <sys/time.h>
+# include <sys/types.h>
+# include <sys/wait.h>
 # include <limits.h>
 # include <fcntl.h>
 
@@ -57,11 +59,13 @@ typedef struct s_data
 	int				time_think;
 	int				number_must_eat;
 	sem_t			*forks;
+	long long int	create_date;
 }	t_data;
 
 typedef struct s_philo
 {
 	int				id;
+	pid_t			pid;
 	t_data			*data;
 }	t_philo;
 
@@ -76,6 +80,24 @@ int				check_arg(int argc, char **argv);
 int				init_data(int argc, char **argv, t_data *data);
 int				init_philo(t_data *data, t_philo **philo);
 int				init_forks(t_data *data);
+
+/*
+**	simulator.c
+*/
+int				simulator(t_data *data, t_philo *philo);
+
+/*
+**	life_philo.c
+*/
+int				life_philo(t_philo *philo);
+
+/*
+**	time.c
+*/
+long long int	date_now(void);
+long long int	elapsed_time(long long int start_time);
+int				msleep(long long int time_in_ms);
+
 
 /*
 **	clear_mem.c

@@ -6,11 +6,13 @@
 /*   By: pmitsuko <pmitsuko@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 10:07:43 by pmitsuko          #+#    #+#             */
-/*   Updated: 2022/11/02 11:25:42 by pmitsuko         ###   ########.fr       */
+/*   Updated: 2022/11/02 14:31:00 by pmitsuko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers_bonus.h"
+#include <errno.h>
+#include <string.h>
 
 /*	INIT_DATA
 **	------------
@@ -33,6 +35,7 @@ int	init_data(int argc, char **argv, t_data *data)
 	if (argc == 6)
 		data->number_must_eat = (int)ft_atol(argv[5]);
 	data->time_think = 1 + data->time_eat - data->time_sleep;
+	data->create_date = -1;
 	data->forks = NULL;
 	return (SUCCESS);
 }
@@ -75,10 +78,12 @@ int	init_philo(t_data *data, t_philo **philo)
 */
 int	init_forks(t_data *data)
 {
-	if (sem_unlink("forks"))
+	sem_unlink("/forks");
+	data->forks = sem_open("/forks", O_CREAT, 0666, data->number_philo);
+	if (data->forks == SEM_FAILED)
+	{
+		put_msg_fd("Failed to open semaphore", 2);
 		return (FAILURE);
-	data->forks = sem_open("forks", O_CREAT, 0666, data->number_philo);
-	if (data->forks == NULL)
-		return (FAILURE);
+	}
 	return (SUCCESS);
 }
