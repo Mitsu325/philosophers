@@ -6,7 +6,7 @@
 /*   By: pmitsuko <pmitsuko@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 11:28:44 by pmitsuko          #+#    #+#             */
-/*   Updated: 2022/11/02 14:46:43 by pmitsuko         ###   ########.fr       */
+/*   Updated: 2022/11/02 19:48:00 by pmitsuko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,20 @@ void	wait_all_pids(t_philo *philo, int id)
 	return ;
 }
 
+void	*stop_dinner(void *arg)
+{
+	t_philo	*philo;
+	int		i;
+
+	philo = (t_philo *)arg;
+	sem_wait(philo->data->stop);
+	i = 0;
+	while (i < philo->data->number_philo)
+		kill(philo[i++].pid, SIGKILL);
+	return (NULL);
+}
+
+
 /*	SIMULATOR
 **	------------
 **	DESCRIPTION
@@ -38,9 +52,11 @@ int	simulator(t_data *data, t_philo *philo)
 {
 	int	i;
 	int	exit_code;
+	pthread_t	thread;
 
 	data->create_date = date_now();
 	i = -1;
+	sem_wait(philo->data->stop);
 	while (++i < data->number_philo)
 	{
 		philo[i].pid = fork();
@@ -51,6 +67,8 @@ int	simulator(t_data *data, t_philo *philo)
 			exit(exit_code);
 		}
 	}
+	pthread_create(&thread, NULL, &stop_dinner, philo);
+	pthread_detach(thread);
 	wait_all_pids(philo, i);
 	return (SUCCESS);
 }

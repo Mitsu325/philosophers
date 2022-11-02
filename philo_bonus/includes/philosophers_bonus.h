@@ -6,7 +6,7 @@
 /*   By: pmitsuko <pmitsuko@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 09:53:37 by pmitsuko          #+#    #+#             */
-/*   Updated: 2022/11/02 15:01:01 by pmitsuko         ###   ########.fr       */
+/*   Updated: 2022/11/02 18:41:01 by pmitsuko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include <sys/wait.h>
 # include <limits.h>
 # include <fcntl.h>
+# include <signal.h>
 
 # define ERR_NUM_ARG "Wrong number of arguments"
 # define ERR_TYPE_ARG "All arguments must be numeric"
@@ -58,15 +59,21 @@ typedef struct s_data
 	int				time_sleep;
 	int				time_think;
 	int				number_must_eat;
-	sem_t			*forks;
+	int				end_of_dinner;
 	long long int	create_date;
+	sem_t			*forks;
+	sem_t			*print;
+	sem_t			*stop;
 }	t_data;
 
 typedef struct s_philo
 {
 	int				id;
+	char			*name;
 	pid_t			pid;
 	int				eat_counter;
+	sem_t			*meals;
+	long long int	last_eat_date;
 	t_data			*data;
 }	t_philo;
 
@@ -80,7 +87,7 @@ int				check_arg(int argc, char **argv);
 */
 int				init_data(int argc, char **argv, t_data *data);
 int				init_philo(t_data *data, t_philo **philo);
-int				init_forks(t_data *data);
+int				init_semaphore(t_data *data);
 
 /*
 **	simulator.c
@@ -112,5 +119,7 @@ int				ft_isdigit(int c);
 long			ft_atol(const char *str);
 void			put_msg_fd(char *s, int fd);
 int				msg_error(char *msg);
+
+char	*ft_itoa(int n);
 
 #endif

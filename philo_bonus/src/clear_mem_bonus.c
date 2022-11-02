@@ -6,7 +6,7 @@
 /*   By: pmitsuko <pmitsuko@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 11:04:12 by pmitsuko          #+#    #+#             */
-/*   Updated: 2022/11/02 14:04:02 by pmitsuko         ###   ########.fr       */
+/*   Updated: 2022/11/02 19:19:09 by pmitsuko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,11 @@
 void	close_semaphore(t_data *data)
 {
 	sem_close(data->forks);
+	sem_close(data->print);
+	sem_close(data->stop);
 	sem_unlink("/forks");
+	sem_unlink("/print");
+	sem_unlink("/stop");
 }
 
 /*	CLEAR_MEMORY
@@ -40,9 +44,18 @@ void	close_semaphore(t_data *data)
 */
 int	clear_memory(t_data *data, t_philo **philo, int status)
 {
+	int	i;
+
+	i = -1;
 	close_semaphore(data);
 	if (*philo)
 	{
+		while (++i < data->number_philo)
+		{
+			sem_close((*philo)[i].meals);
+			sem_unlink((*philo)[i].name);
+			free((*philo)[i].name);
+		}
 		free(*philo);
 		*philo = NULL;
 	}
