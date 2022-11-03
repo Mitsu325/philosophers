@@ -6,16 +6,16 @@
 /*   By: pmitsuko <pmitsuko@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 11:04:12 by pmitsuko          #+#    #+#             */
-/*   Updated: 2022/11/02 19:19:09 by pmitsuko         ###   ########.fr       */
+/*   Updated: 2022/11/02 22:51:00 by pmitsuko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers_bonus.h"
 
-/*	DESTROY_MUTEX
+/*	CLOSE_SEMAPHORE
 **	------------
 **	DESCRIPTION
-**	Destroy all mutex.
+**	Close all semaphore.
 **	PARAMETERS
 **	#1. The data struct pointed (data);
 **	RETURN VALUES

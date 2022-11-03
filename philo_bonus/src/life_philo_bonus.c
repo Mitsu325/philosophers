@@ -6,40 +6,22 @@
 /*   By: pmitsuko <pmitsuko@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 11:58:03 by pmitsuko          #+#    #+#             */
-/*   Updated: 2022/11/02 22:37:06 by pmitsuko         ###   ########.fr       */
+/*   Updated: 2022/11/02 23:15:43 by pmitsuko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers_bonus.h"
 
-void	print_msg(t_philo *philo, char *msg)
-{
-	printf("%lld %d %s\n", elapsed_time(philo->data->create_date),
-		philo->id, msg);
-}
-
-void	print_log(t_philo *philo, char *msg)
-{
-	sem_wait(philo->data->print);
-	print_msg(philo, msg);
-	sem_post(philo->data->print);
-}
-
-void	hold_fork(t_philo *philo)
-{
-	sem_wait(philo->data->forks);
-	sem_wait(philo->data->forks);
-	print_log(philo, FORK);
-	print_log(philo, FORK);
-}
-
-void	drop_fork(t_philo *philo)
-{
-	sem_post(philo->data->forks);
-	sem_post(philo->data->forks);
-}
-
-int	eat(t_philo *philo)
+/*	EAT
+**	------------
+**	DESCRIPTION
+**	Print the log and count the meals.
+**	PARAMETERS
+**	#1. The philo struct pointer (philo);
+**	RETURN VALUES
+**	-
+*/
+static void	eat(t_philo *philo)
 {
 	print_log(philo, EAT);
 	philo->eat_counter++;
@@ -47,10 +29,34 @@ int	eat(t_philo *philo)
 	philo->last_eat_date = elapsed_time(philo->data->create_date);
 	sem_post(philo->meals);
 	msleep(philo->data->time_eat);
-	return (SUCCESS);
 }
 
-void	*monitor_dinner(void *arg)
+/*	GO_SLEEP
+**	------------
+**	DESCRIPTION
+**	Print the log and drop forks.
+**	PARAMETERS
+**	#1. The philo struct pointer (philo);
+**	RETURN VALUES
+**	-
+*/
+static void	go_sleep(t_philo *philo)
+{
+	print_log(philo, SLEEP);
+	drop_fork(philo);
+	msleep(philo->data->time_sleep);
+}
+
+/*	MONITOR_DINNER
+**	------------
+**	DESCRIPTION
+**	Monitors if a philo has died.
+**	PARAMETERS
+**	#1. The philo struct pointer (arg);
+**	RETURN VALUES
+**	Return NULL
+*/
+static void	*monitor_dinner(void *arg)
 {
 	t_philo	*philo;
 
@@ -81,36 +87,28 @@ void	*monitor_dinner(void *arg)
 **	RETURN VALUES
 **	-
 */
-int	life_philo(t_philo *philo)
+void	life_philo(t_philo *philo)
 {
 	pthread_t	monitor;
 
 	if (philo->id % 2 == 0)
 		msleep(5);
 	if (pthread_create(&monitor, NULL, &monitor_dinner, philo))
-		return (FAILURE);
+		return ;
 	pthread_detach(monitor);
 	if (philo->data->number_philo == 1)
-	{
-		sem_wait(philo->data->forks);
-		print_log(philo, FORK);
-	}
+		one_philo_hold_fork(philo);
 	while (1)
 	{
 		hold_fork(philo);
 		eat(philo);
 		if (philo->eat_counter == philo->data->number_must_eat)
 		{
-			print_log(philo, SLEEP);
-			drop_fork(philo);
-			msleep(philo->data->time_sleep);
-			return (SUCCESS);
+			go_sleep(philo);
+			return ;
 		}
-		print_log(philo, SLEEP);
-		drop_fork(philo);
-		msleep(philo->data->time_sleep);
+		go_sleep(philo);
 		print_log(philo, THINK);
 		msleep(philo->data->time_think);
 	}
-	return (SUCCESS);
 }

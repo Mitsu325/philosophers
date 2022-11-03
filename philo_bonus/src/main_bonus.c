@@ -6,7 +6,7 @@
 /*   By: pmitsuko <pmitsuko@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 09:55:25 by pmitsuko          #+#    #+#             */
-/*   Updated: 2022/11/02 19:27:35 by pmitsuko         ###   ########.fr       */
+/*   Updated: 2022/11/02 22:52:39 by pmitsuko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,11 @@ int	main(int argc, char **argv)
 	if (check_arg(argc, argv) == FAILURE)
 		return (FAILURE);
 	init_data(argc, argv, &data);
-	if (init_semaphore(&data) == FAILURE)
-		return (FAILURE);
 	philo = NULL;
+	if (init_semaphore(&data) == FAILURE)
+		return (clear_memory(&data, &philo, FAILURE));
 	if (init_philo(&data, &philo) == FAILURE)
 		return (clear_memory(&data, &philo, FAILURE));
-	if (simulator(&data, philo) == FAILURE)
-		return (clear_memory(&data, &philo, FAILURE));
+	simulator(&data, philo);
 	return (clear_memory(&data, &philo, SUCCESS));
 }

@@ -6,7 +6,7 @@
 /*   By: pmitsuko <pmitsuko@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/30 10:37:57 by pmitsuko          #+#    #+#             */
-/*   Updated: 2022/10/30 15:32:13 by pmitsuko         ###   ########.fr       */
+/*   Updated: 2022/11/02 23:04:28 by pmitsuko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ static int	check_philo_die(t_philo *philo)
 /*	MONITOR_DINNER
 **	------------
 **	DESCRIPTION
-**	Monitors if all philo ate at least the number of times must eat.
+**	Monitors if a philo has died and print log.
 **	PARAMETERS
 **	#1. The philo struct pointer (arg);
 **	RETURN VALUES

@@ -6,7 +6,7 @@
 #    By: pmitsuko <pmitsuko@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/20 07:29:43 by pmitsuko          #+#    #+#              #
-#    Updated: 2022/11/02 22:38:35 by pmitsuko         ###   ########.fr        #
+#    Updated: 2022/11/02 23:14:30 by pmitsuko         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,11 +47,12 @@ FILES = main_bonus.c\
 		check_arg_bonus.c\
 		clear_mem_bonus.c\
 		init_bonus.c\
+		itoa_bonus.c\
 		life_philo_bonus.c\
+		life_philo_utils_bonus.c\
 		simulator_bonus.c\
 		time_bonus.c\
-		utils_bonus.c\
-		ft_itoa.c
+		utils_bonus.c
 
 # COMPILED_SOURCES #
 

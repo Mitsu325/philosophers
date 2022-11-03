@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa.c                                          :+:      :+:    :+:   */
+/*   itoa_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pmitsuko <pmitsuko@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/02 18:39:19 by pmitsuko          #+#    #+#             */
-/*   Updated: 2022/11/02 18:39:19 by pmitsuko         ###   ########.fr       */
+/*   Created: 2022/11/02 23:10:35 by pmitsuko          #+#    #+#             */
+/*   Updated: 2022/11/02 23:10:35 by pmitsuko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static char	*n_convert(char *str,
 	return (str);
 }
 
-size_t	nb_size(int num)
+static size_t	nb_size(int num)
 {
 	size_t	len;
 
@@ -44,6 +44,15 @@ size_t	nb_size(int num)
 	return (len);
 }
 
+/*	FT_ITOA
+**	------------
+**	DESCRIPTION
+**	Convert a int to a string.
+**	PARAMETERS
+**	#1. The integer to convert (n);
+**	RETURN VALUES
+**	Return a string.
+*/
 char	*ft_itoa(int n)
 {
 	size_t			n_digits;

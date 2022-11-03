@@ -6,7 +6,7 @@
 /*   By: pmitsuko <pmitsuko@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 09:53:37 by pmitsuko          #+#    #+#             */
-/*   Updated: 2022/11/02 18:41:01 by pmitsuko         ###   ########.fr       */
+/*   Updated: 2022/11/02 23:16:23 by pmitsuko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ typedef struct s_data
 	int				time_sleep;
 	int				time_think;
 	int				number_must_eat;
-	int				end_of_dinner;
 	long long int	create_date;
 	sem_t			*forks;
 	sem_t			*print;
@@ -78,48 +77,59 @@ typedef struct s_philo
 }	t_philo;
 
 /*
-**	check_arg.c
+**	check_arg_bonus.c
 */
 int				check_arg(int argc, char **argv);
 
 /*
-**	init.c
+**	init_bonus.c
 */
 int				init_data(int argc, char **argv, t_data *data);
 int				init_philo(t_data *data, t_philo **philo);
 int				init_semaphore(t_data *data);
 
 /*
-**	simulator.c
+**	simulator_bonus.c
 */
-int				simulator(t_data *data, t_philo *philo);
+void			simulator(t_data *data, t_philo *philo);
 
 /*
-**	life_philo.c
+**	life_philo_bonus.c
 */
-int				life_philo(t_philo *philo);
+void			life_philo(t_philo *philo);
 
 /*
-**	time.c
+**	life_philo_utils_bonus.c
+*/
+void			print_msg(t_philo *philo, char *msg);
+void			print_log(t_philo *philo, char *msg);
+void			hold_fork(t_philo *philo);
+void			one_philo_hold_fork(t_philo *philo);
+void			drop_fork(t_philo *philo);
+
+/*
+**	time_bonus.c
 */
 long long int	date_now(void);
 long long int	elapsed_time(long long int start_time);
 int				msleep(long long int time_in_ms);
 
-
 /*
-**	clear_mem.c
+**	clear_mem_bonus.c
 */
 int				clear_memory(t_data *data, t_philo **philo, int status);
 
 /*
-**	utils.c
+**	utils_bonus.c
 */
 int				ft_isdigit(int c);
 long			ft_atol(const char *str);
 void			put_msg_fd(char *s, int fd);
 int				msg_error(char *msg);
 
-char	*ft_itoa(int n);
+/*
+**	itoa_bonus.c
+*/
+char			*ft_itoa(int n);
 
 #endif

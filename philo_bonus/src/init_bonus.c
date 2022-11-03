@@ -6,13 +6,11 @@
 /*   By: pmitsuko <pmitsuko@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 10:07:43 by pmitsuko          #+#    #+#             */
-/*   Updated: 2022/11/02 21:53:24 by pmitsuko         ###   ########.fr       */
+/*   Updated: 2022/11/02 23:16:06 by pmitsuko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers_bonus.h"
-#include <errno.h>
-#include <string.h>
 
 /*	INIT_DATA
 **	------------
@@ -36,7 +34,6 @@ int	init_data(int argc, char **argv, t_data *data)
 		data->number_must_eat = (int)ft_atol(argv[5]);
 	data->time_think = 1 + data->time_eat - data->time_sleep;
 	data->create_date = -1;
-	data->end_of_dinner = FALSE;
 	data->forks = NULL;
 	return (SUCCESS);
 }
@@ -67,11 +64,15 @@ int	init_philo(t_data *data, t_philo **philo)
 		(*philo)[i].last_eat_date = 0;
 		sem_unlink((*philo)[i].name);
 		(*philo)[i].meals = sem_open((*philo)[i].name, O_CREAT, 0777, 1);
+		if ((*philo)[i].meals == SEM_FAILED)
+		{
+			put_msg_fd("Failed to open semaphore", 2);
+			return (FAILURE);
+		}
 		(*philo)[i].data = data;
 	}
 	return (SUCCESS);
 }
-
 
 /*	INIT_FORKS
 **	------------
@@ -85,22 +86,13 @@ int	init_philo(t_data *data, t_philo **philo)
 int	init_semaphore(t_data *data)
 {
 	sem_unlink("/forks");
-	data->forks = sem_open("/forks", O_CREAT, 0777, data->number_philo);
-	if (data->forks == SEM_FAILED)
-	{
-		put_msg_fd("Failed to open semaphore", 2);
-		return (FAILURE);
-	}
 	sem_unlink("/print");
-	data->print = sem_open("/print", O_CREAT, 0777, 1);
-	if (data->print == SEM_FAILED)
-	{
-		put_msg_fd("Failed to open semaphore", 2);
-		return (FAILURE);
-	}
 	sem_unlink("/stop");
+	data->forks = sem_open("/forks", O_CREAT, 0777, data->number_philo);
+	data->print = sem_open("/print", O_CREAT, 0777, 1);
 	data->stop = sem_open("/stop", O_CREAT, 0777, 0);
-	if (data->stop == SEM_FAILED)
+	if (data->forks == SEM_FAILED || data->print == SEM_FAILED
+		|| data->stop == SEM_FAILED)
 	{
 		put_msg_fd("Failed to open semaphore", 2);
 		return (FAILURE);
