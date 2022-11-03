@@ -6,7 +6,7 @@
 /*   By: pmitsuko <pmitsuko@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 11:58:03 by pmitsuko          #+#    #+#             */
-/*   Updated: 2022/11/02 19:26:11 by pmitsuko         ###   ########.fr       */
+/*   Updated: 2022/11/02 22:37:06 by pmitsuko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,11 @@ int	life_philo(t_philo *philo)
 	if (pthread_create(&monitor, NULL, &monitor_dinner, philo))
 		return (FAILURE);
 	pthread_detach(monitor);
+	if (philo->data->number_philo == 1)
+	{
+		sem_wait(philo->data->forks);
+		print_log(philo, FORK);
+	}
 	while (1)
 	{
 		hold_fork(philo);

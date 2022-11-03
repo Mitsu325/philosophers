@@ -6,7 +6,7 @@
 /*   By: pmitsuko <pmitsuko@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 10:07:43 by pmitsuko          #+#    #+#             */
-/*   Updated: 2022/11/02 19:47:02 by pmitsuko         ###   ########.fr       */
+/*   Updated: 2022/11/02 21:53:24 by pmitsuko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ int	init_semaphore(t_data *data)
 		return (FAILURE);
 	}
 	sem_unlink("/stop");
-	data->stop = sem_open("/stop", O_CREAT, 0777, 1);
+	data->stop = sem_open("/stop", O_CREAT, 0777, 0);
 	if (data->stop == SEM_FAILED)
 	{
 		put_msg_fd("Failed to open semaphore", 2);

@@ -6,7 +6,7 @@
 /*   By: pmitsuko <pmitsuko@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 11:28:44 by pmitsuko          #+#    #+#             */
-/*   Updated: 2022/11/02 19:48:00 by pmitsuko         ###   ########.fr       */
+/*   Updated: 2022/11/02 21:57:18 by pmitsuko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ int	simulator(t_data *data, t_philo *philo)
 
 	data->create_date = date_now();
 	i = -1;
-	sem_wait(philo->data->stop);
 	while (++i < data->number_philo)
 	{
 		philo[i].pid = fork();
